@@ -28,14 +28,18 @@ table_master = tl_master.read_telescope_events()
 
 keys = table_pr.keys()
 keys.remove('tels_with_trigger')
+checked_keys = []
 for key in keys:
     table_master.remove_rows(np.isnan(table_master[key].value))
     table_pr.remove_rows(np.isnan(table_pr[key].value))
-    if not np.all(table_master[key]==table_pr[key]):
-        print('Something broke on the new branch')
-        break
-    else:
-        print(f'All entries for {key} are correct' )
+    if np.all(table_master[key]==table_pr[key]):
+        checked_keys.append(key)
+        
+checked_keys == keys
+```
+
+```python
+len(table_pr)
 ```
 
 ```python
